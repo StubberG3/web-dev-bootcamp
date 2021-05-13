@@ -1,38 +1,30 @@
-// function makeMysteryFunc () {
-//     const rand = Math.random();
-//     if (rand > 0.5) {
-//         return function () {
-//             console.log('CONGRATS, I AM A GOOD FUNCTION!\nYOU WIN A MILLION DOLLARS!!');
-//         }
-//     }
-//     else {
-//         return function () {
-//             alert('YOU HAVE BEEN INFECTED BY A COMPUTER VIRUS');
-//         }
-//     }
-// }
+// methods are functions that have been added/defined as properties on an object
 
-// const mystery = makeMysteryFunc();
-
-// mystery();
-
-function makeBetweenFunc (min, max) {
-    return function (num) {
-        return num >= min && num <= max;
+const math = {
+    PI: 3.14159,
+    multiply: function (x, y) { // method
+        return x * y;
+    },
+    divide: function (x, y) { // method
+        return x / y;
+    },
+    square: function (x) { // method
+        return x * x;
+    },
+    cube: function (x, y) { // method
+        return x ** 3;
+    },
+    add (x, y) { // method - shorthand
+        return x + y;
+    },
+    subtract (x, y) { // method - shorthand
+        return x - y;
     }
 }
 
-const isChild = makeBetweenFunc(0, 18);
-const isAdult = makeBetweenFunc(19, 64);
-const isSenior = makeBetweenFunc(65, 120);
-
-isSenior(40);
-
-
-// function isBetween (num) {
-//     return num >= 50 && num <= 100;
-// }
-
-// function isBetween2 (num) {
-//     return num >= 1 && num <= 10;
-// }
+console.log(math.PI);
+console.log(math.multiply(10, 2));
+console.log(math.divide(10, 2));
+console.log(math.square(10));
+console.log(math.add(10, 2));
+console.log(math.subtract(10, 2));
