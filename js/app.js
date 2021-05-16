@@ -1,21 +1,17 @@
-const cat = {
-    name: 'Kasha',
-    color: 'tortoise',
-    breed: 'devil',
-    meow () {
-        console.log("THIS IS ", this);
-        console.log(`${this.name} says MEOWWWW`);
+// try {
+//     hello.toUpperCase();
+// } catch {
+//     console.log("ERROR!!!!!");
+// }
+
+// console.log('After?');
+
+function yell (msg) {
+    try {
+        console.log(msg.toUpperCase().repeat(3));
+    } catch (e) {
+        console.warn('Please pass a string next time!');
     }
 }
 
-// cat.meow();
-
-const meow2 = cat.meow;
-// window.name = 'Neko';
-meow2();
-
-function scream () {
-    console.log('AHHHHHHHHHH');
-}
-
-scream();
+yell(true);
