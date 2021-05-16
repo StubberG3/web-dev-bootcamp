@@ -1,32 +1,18 @@
-// const numbers = [1, 2, 3, 4, 5];
+// map
+// map data into a newly-copied array
+// transform all info in current array into a new array
 
-// numbers.forEach(function (el) {
-//     if (el % 2 === 0) {
-//         console.log(el);
-//     }
+const texts = ['rofl', 'lol', 'omg', 'ttyl'];
+// const caps = texts.map(function (t) {
+//     return t.toUpperCase();
 // });
 
-// for (let el of numbers) {
-//     console.log(el);
-// }
+// texts: ["rofl", "lol", "omg", "ttyl"]
+// caps: ["ROFL", "LOL", "OMG", "TTYL"]
 
-const testScores = [
-    {
-        name: 'Gregg',
-        score: 90
-    },
-    {
-        name: 'Angela',
-        score: 95
-    },
-    {
-        name: 'Stephen',
-        score: 100,
-    }
-]
-
-// Gregg - 90/100
-
-testScores.forEach(function (person) {
-    console.log(`${person.name} - ${person.score}/100`);
+const caps = texts.map(function (text) {
+    return text.toUpperCase();
 });
+
+console.log(texts);
+console.log(caps);
