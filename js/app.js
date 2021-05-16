@@ -1,15 +1,30 @@
-// implicit returns
+const anime = [
+    {
+        title: 'Cowboy Bebop',
+        socre: 99
+    },
+    {
+        title: 'RE: Zero',
+        score: 85
+    },
+    {
+        title: 'Trigun',
+        score: 95
+    },
+    {
+        title: 'KON!',
+        score: 90
+    },
+    {
+        title: 'Durarara',
+        score: 80
+    }
+]
 
-// const rollDie = () => {
-//     return Math.floor(Math.random() * 6) - 1;
-// }
+// const animeRatings = anime.map(function(movie) {
+//     return `${movie.title} - {movie.score / 10}`;
+// });
 
-const rollDie = () => (
-    Math.floor(Math.random() * 6) - 1
-)
-
-// const add = (a, b) => {
-//     return a + b;
-// }
-
-const add = (a, b) => a + b;
+const animeRatings = anime.map(anime => (
+    `${anime.title} - ${anime.score / 10}`
+))
