@@ -1,18 +1,15 @@
-// arrow function practice
+// implicit returns
 
-const square = (x) => {
-    return x ** 2; // x * x
-}
+// const rollDie = () => {
+//     return Math.floor(Math.random() * 6) - 1;
+// }
 
-const add = (x, y) => { return x + y };
+const rollDie = () => (
+    Math.floor(Math.random() * 6) - 1
+)
 
-// console.log(add(1, 1));
-// console.log(square(4, 4));
+// const add = (a, b) => {
+//     return a + b;
+// }
 
-const rollDie = () => { return Math.floor(Math.random() * 6 + 1) };
-
-console.log(rollDie());
-
-const sayCheese = name => { return console.log(`Say cheese, ${name}!`) };
-
-sayCheese('Gregg');
+const add = (a, b) => a + b;
