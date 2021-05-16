@@ -1,17 +1,32 @@
-// try {
-//     hello.toUpperCase();
-// } catch {
-//     console.log("ERROR!!!!!");
+// const numbers = [1, 2, 3, 4, 5];
+
+// numbers.forEach(function (el) {
+//     if (el % 2 === 0) {
+//         console.log(el);
+//     }
+// });
+
+// for (let el of numbers) {
+//     console.log(el);
 // }
 
-// console.log('After?');
-
-function yell (msg) {
-    try {
-        console.log(msg.toUpperCase().repeat(3));
-    } catch (e) {
-        console.warn('Please pass a string next time!');
+const testScores = [
+    {
+        name: 'Gregg',
+        score: 90
+    },
+    {
+        name: 'Angela',
+        score: 95
+    },
+    {
+        name: 'Stephen',
+        score: 100,
     }
-}
+]
 
-yell(true);
+// Gregg - 90/100
+
+testScores.forEach(function (person) {
+    console.log(`${person.name} - ${person.score}/100`);
+});
