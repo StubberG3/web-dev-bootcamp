@@ -1,18 +1,18 @@
-// map
-// map data into a newly-copied array
-// transform all info in current array into a new array
+// arrow function practice
 
-const texts = ['rofl', 'lol', 'omg', 'ttyl'];
-// const caps = texts.map(function (t) {
-//     return t.toUpperCase();
-// });
+const square = (x) => {
+    return x ** 2; // x * x
+}
 
-// texts: ["rofl", "lol", "omg", "ttyl"]
-// caps: ["ROFL", "LOL", "OMG", "TTYL"]
+const add = (x, y) => { return x + y };
 
-const caps = texts.map(function (text) {
-    return text.toUpperCase();
-});
+// console.log(add(1, 1));
+// console.log(square(4, 4));
 
-console.log(texts);
-console.log(caps);
+const rollDie = () => { return Math.floor(Math.random() * 6 + 1) };
+
+console.log(rollDie());
+
+const sayCheese = name => { return console.log(`Say cheese, ${name}!`) };
+
+sayCheese('Gregg');
