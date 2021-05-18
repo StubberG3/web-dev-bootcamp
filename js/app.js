@@ -1,20 +1,10 @@
-// Rest Params
+// DESTRUCTURING
 
-// function sum () {
-//     console.log(arguments);
-// }
+const scores = [50, 60, 70, 80, 90, 95, 99, 100];
 
-// function sum () {
-//     return arguments.reduce((total, el) => total + el);
-// }
+// old
+const highScore = scores[0];
+const secondHighestScore = scores[1];
 
-function sum (...nums) { // collect the rest of the values
-    return nums.reduce((total, el) => total + el);
-}
-
-// note: spread doesn't work with arrow functions
-function raceResults (gold, silver, ...everyoneElse) {
-    console.log(`GOLD MEDAL GOES TO: ${gold}`);
-    console.log(`SILVER MEDAL GOES TO: ${silver}`);
-    console.log(`ELSE GOES TO: ${everyoneElse}`);
-}
+// new
+const [gold, silver, bronze, ...everyElse] = scores;
