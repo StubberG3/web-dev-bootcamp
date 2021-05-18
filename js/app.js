@@ -1,37 +1,20 @@
-// spread ES6
-// convert iterables into separate arguments
+// Rest Params
 
-// const nums = [1, 2, 3, 4, 5];
+// function sum () {
+//     console.log(arguments);
+// }
 
-// console.log(Math.max(...nums));
+// function sum () {
+//     return arguments.reduce((total, el) => total + el);
+// }
 
-// console.log(nums);
-// console.log(...nums);
-
-// console.log('hello');
-// console.log(...'hello'); // pass in as separate characters
-
-// spread array(s) into another array
-// const cats = ['Blue', 'Scout', 'Rocket'];
-// const dogs = ['Rusty', 'Wyatt'];
-
-// const allPets = [...cats, ...dogs, 'Hamilton'];
-
-// // spread iterables into an array
-
-// console.log([..."hello"]);
-
-// spread in object literals
-
-const feline = { legs: 4, family: 'Felidae' };
-const canine = { isFurry: true, family: 'Caninae' };
-
-const catDog = { ...feline, color: 'black', ...canine };
-
-const dataFromForm = {
-    email: 'testuser@gmail.com',
-    password: 'password1',
-    username: 'testuser'
+function sum (...nums) { // collect the rest of the values
+    return nums.reduce((total, el) => total + el);
 }
 
-const mergedData = { ...dataFromForm, gender: 'M' };
+// note: spread doesn't work with arrow functions
+function raceResults (gold, silver, ...everyoneElse) {
+    console.log(`GOLD MEDAL GOES TO: ${gold}`);
+    console.log(`SILVER MEDAL GOES TO: ${silver}`);
+    console.log(`ELSE GOES TO: ${everyoneElse}`);
+}
