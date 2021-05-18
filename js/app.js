@@ -43,5 +43,18 @@ const user2 = {
 // add default value
 const { city, state, born: bornDate = 'N/A' } = user2;
 
+// PARAM DESTRUCTURING
 
+// function fullName (user) {
+//     return `${user.firstName} ${user.lastName}`;
+// }
 
+// function fullName (user) {
+//     const { firstName = 'First', lastName = 'Last' } = user;
+
+//     return `${firstName} ${lastName}`;
+// }
+
+function fullName ({ firstName = 'First', lastName = 'Last' }) {
+    return `${firstName} ${lastName}`;
+}
