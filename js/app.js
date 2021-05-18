@@ -8,3 +8,40 @@ const secondHighestScore = scores[1];
 
 // new
 const [gold, silver, bronze, ...everyElse] = scores;
+
+// OBJECT DESTRUCTURING
+
+const user = {
+    email: 'testuser@gmail.com',
+    password: 'Password1!',
+    firstName: 'Test',
+    lastName: 'User',
+    birthDate: '5/18/2021',
+    born: 1980,
+    died: 2021,
+    city: 'Philly',
+    state: 'PA'
+}
+
+const user2 = {
+    email: 'testuser2@gmail.com',
+    password: 'Password2!',
+    firstName: 'Test',
+    lastName: 'User2',
+    birthDate: '5/18/2022',
+    born: undefined,
+    city: 'Maple Shade',
+    state: 'NJ'
+}
+
+// old
+// const email = user.email;
+
+// new
+// const { email, password, firstName, born: birthYear, died: deathYear } = user;
+
+// add default value
+const { city, state, born: bornDate = 'N/A' } = user2;
+
+
+
