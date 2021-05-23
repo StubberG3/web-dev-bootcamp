@@ -1,60 +1,70 @@
-// DESTRUCTURING
+// // This is a Constructor Function...
 
-const scores = [50, 60, 70, 80, 90, 95, 99, 100];
-
-// old
-const highScore = scores[0];
-const secondHighestScore = scores[1];
-
-// new
-const [gold, silver, bronze, ...everyElse] = scores;
-
-// OBJECT DESTRUCTURING
-
-const user = {
-    email: 'testuser@gmail.com',
-    password: 'Password1!',
-    firstName: 'Test',
-    lastName: 'User',
-    birthDate: '5/18/2021',
-    born: 1980,
-    died: 2021,
-    city: 'Philly',
-    state: 'PA'
-}
-
-const user2 = {
-    email: 'testuser2@gmail.com',
-    password: 'Password2!',
-    firstName: 'Test',
-    lastName: 'User2',
-    birthDate: '5/18/2022',
-    born: undefined,
-    city: 'Maple Shade',
-    state: 'NJ'
-}
-
-// old
-// const email = user.email;
-
-// new
-// const { email, password, firstName, born: birthYear, died: deathYear } = user;
-
-// add default value
-const { city, state, born: bornDate = 'N/A' } = user2;
-
-// PARAM DESTRUCTURING
-
-// function fullName (user) {
-//     return `${user.firstName} ${user.lastName}`;
+// function Color (r, g, b) {
+//     this.r = r;
+//     this.g = g;
+//     this.b = b;
 // }
 
-// function fullName (user) {
-//     const { firstName = 'First', lastName = 'Last' } = user;
+// //
 
-//     return `${firstName} ${lastName}`;
+// /**
+//  * THE NEW OPERATOR!
+//  *
+//  * 1. Creates a blank, plain JavaScript object;
+//  * 2. Links (sets the constructor of) this object to another object;
+//  * 3. Passes the newly created object from Step 1 as the this context;
+//  * 4. Returns this if the function doesn't return its own object
+//  */
+
+// Color.prototype.rgb = function () {
+//     const { r, g, b } = this;
+//     return `rgb(${r}, ${g}, ${b})`;
+// };
+
+// Color.prototype.hex = function () {
+//     const { r, g, b } = this;
+//     return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+// };
+
+// Color.prototype.rgba = function (a = 1.0) {
+//     const { r, g, b } = this;
+//     return `rgba(${r}, ${g}, ${b}, ${a})`;
 // }
 
-function fullName ({ firstName = 'First', lastName = 'Last' }) {
-    return `${firstName} ${lastName}`;
+// const color1 = new Color(40, 255, 60);
+// color1.hex();
+// const color2 = new Color(0, 0, 0);
+// color2.hex();
+
+class Color {
+    constructor(r, g, b, name) { // executes immediately
+        // this refers to the instance
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.name = name;
+    }
+    // methods added to Color.prototype automatically
+    innerRGB () {
+        const { r, g, b } = this;
+        return `${r}, ${g}, ${b}`;
+    }
+    rgb () {
+        const { r, g, b } = this;
+        return `rgb(${this.innerRGB()})`;
+    }
+    hex () {
+        const { r, g, b } = this;
+        return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    }
+    rgba (a = 1.0) {
+        const { r, g, b } = this;
+        return `rgba(${this.innerRGB()}, ${a})`;
+    }
 }
+
+// instantiate new instances of Color
+const tomato = new Color(255, 67, 89, 'tomato');
+const white = new Color(255, 255, 255, 'white');
+const black = new Color(0, 0, 0, 'black');
