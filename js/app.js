@@ -1,85 +1,147 @@
-class Color {
-    constructor(r, g, b, name) {
-        this.r = r;
-        this.g = g;
-        this.b = b;
-        this.name = name;
-        this.calcHSL();
-    }
-    innerRGB () {
-        const { r, g, b } = this;
-        return `${r}, ${g}, ${b}`;
-    }
-    rgb () {
-        return `rgb(${this.innerRGB()})`;
-    }
-    rgba (a = 1.0) {
-        return `rgba(${this.innerRGB()}, ${a})`;
-    }
-    hex () {
-        const { r, g, b } = this;
-        return (
-            '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
-        );
-    }
-    hsl () {
-        const { h, s, l } = this;
-        return `hsl(${h},${s}%, ${l}%)`;
-    }
-    fullySaturated () {
-        const { h, l } = this;
-        return `hsl(${h},100%, ${l}%)`;
-    }
-    opposite () {
-        const { h, s, l } = this;
-        const newHue = (h + 180) % 360;
-        return `hsl(${newHue},${s}%, ${l}%)`;
-    }
-    calcHSL () {
-        let { r, g, b } = this;
-        // Make r, g, and b fractions of 1
-        r /= 255;
-        g /= 255;
-        b /= 255;
-
-        // Find greatest and smallest channel values
-        let cmin = Math.min(r, g, b),
-            cmax = Math.max(r, g, b),
-            delta = cmax - cmin,
-            h = 0,
-            s = 0,
-            l = 0;
-        if (delta == 0) h = 0;
-        else if (cmax == r)
-            // Red is max
-            h = ((g - b) / delta) % 6;
-        else if (cmax == g)
-            // Green is max
-            h = (b - r) / delta + 2;
-        else
-            // Blue is max
-            h = (r - g) / delta + 4;
-
-        h = Math.round(h * 60);
-
-        // Make negative hues positive behind 360°
-        if (h < 0) h += 360;
-        // Calculate lightness
-        l = (cmax + cmin) / 2;
-
-        // Calculate saturation
-        s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
-
-        // Multiply l and s by 100
-        s = +(s * 100).toFixed(1);
-        l = +(l * 100).toFixed(1);
-        this.h = h;
-        this.s = s;
-        this.l = l;
+class Node {
+    constructor(val) {
+        this.val = val;
+        this.next = null;
     }
 }
-const red = new Color(255, 67, 89, 'tomato');
-red.hsl();
-red.opposite();
-red.rgba(0.3);
-const white = new Color(255, 255, 255, 'white');
+
+class SinglyLinkedList {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+    }
+    clear () {
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+        return list;
+    }
+    print () {
+        let current = this.head;
+        let arr = [];
+        while (current) {
+            arr.push(current.val);
+            current = current.next;
+        }
+        console.log(arr);
+    }
+    push (val) {
+        let newNode = new Node(val);
+
+        if (!this.head) {
+            this.head = newNode;
+        } else {
+            this.tail.next = newNode;
+        }
+
+        this.tail = newNode;
+        this.length++;
+        return newNode;
+    }
+    pop () {
+        if (!this.length) return undefined;
+
+        let current = this.head;
+        let newTail = current;
+        while (current.next) {
+            newTail = current;
+            current = current.next;
+        }
+        this.tail = newTail;
+        newTail.next = null;
+        this.length--;
+        if (!this.length) {
+            this.head = null;
+        }
+        return current;
+    }
+    shift () {
+        if (!this.length) return undefined;
+        let shifted = this.head;
+        this.head = this.head.next;
+        this.length--;
+        if (this.length === 1) {
+            this.tail = this.head;
+        }
+        return shifted;
+    }
+    unshift (val) {
+        let newHead = new Node(val);
+        if (!this.head) {
+            this.head = newHead;
+            this.tail = newHead;
+        } else {
+            newHead.next = this.head;
+            this.head = newHead;
+        }
+        this.length++;
+        return this.head;
+    }
+    // get
+    get (idx) {
+        if (typeof (idx) !== "number" || idx < 0 || idx >= this.length) return undefined;
+        if (idx === 0) return this.head;
+        let current = this.head;
+        for (let i = 0; i !== idx; i++) {
+            current = current.next;
+        }
+        return current;
+    }
+    // set
+    set (idx, val) {
+        if (typeof (idx) !== "number" || idx < 0 || idx >= this.length) return undefined;
+        let foundNode = this.get(idx);
+        if (!foundNode || foundNode === "undefined") return undefined;
+        foundNode.val = val;
+        return foundNode;
+    }
+    // insert
+    insert (idx, val) {
+        if (typeof (idx) !== "number" || idx < 0 || idx > this.length) return undefined;
+        if (idx === 0) return this.unshift(val);
+        if (idx === this.length) return this.push(val);
+        let newNode = new Node(val);
+        let prev = this.get(idx - 1);
+        let prevNext = prev.next;
+        prevNext = newNode;
+        newNode.next = prevNext;
+        this.length++;
+        return newNode;
+    }
+    // remove
+    remove (idx) {
+        if (typeof (idx) !== "number" || idx < 0 || idx >= this.length) return undefined;
+        if (idx === 0) return this.shift();
+        if (idx === this.length - 1) return this.pop();
+
+        let prev = this.get(idx - 1);
+        let removed = prev.next;
+        prev.next = removed.next;
+        this.length--;
+        return removed;
+    }
+
+    // reverse
+    reverse () {
+        let current = this.head;
+        this.head = this.tail;
+        this.tail = current;
+
+        let prev = null;
+        let next = null;
+
+        while (current) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        return this;
+    }
+}
+
+var list = new SinglyLinkedList();
+list.push(1);
+list.push(2);
+list.push(3);
