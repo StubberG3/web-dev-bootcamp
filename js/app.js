@@ -1,68 +1,68 @@
-class StackNode {
+class QueueNode {
     constructor(val) {
         this.val = val;
         this.next = null;
     }
 }
 
-class Stack {
+// FIFO
+class Queue {
     constructor() {
         this.first = null;
         this.last = null;
-        this.length = 0;
+        this.size = 0;
     }
     clear () {
         this.first = null;
         this.last = null;
-        this.length = 0;
+        this.size = 0;
         return this;
     }
     print () {
-        let currentNode = this.last;
+        let current = this.last;
         let arr = [];
-        while (currentNode) {
-            arr.push(currentNode.val);
-            currentNode = currentNode.next;
+        while (current) {
+            arr.push(current.val);
+            current = current.next;
         }
         console.log(arr);
     }
-    pop () {
-        let poppedNode = this.last;
-        if (!poppedNode) return null;
-        if (poppedNode === this.first) {
-            this.last = null;
-            this.first = null;
-        }
-        else {
-            this.last = poppedNode.next;
-        }
-        this.length--;
-        return poppedNode;
-    }
-    push (val) {
-        let newNode = new StackNode(val);
+    enqueue (val) {
+        let enqueueNode = new QueueNode(val);
         if (!this.first) {
-            this.first = newNode;
-            this.last = newNode;
+            this.first = enqueueNode;
+            this.last = enqueueNode;
+            this.size++;
+            return this;
         }
         else {
-            newNode.next = this.last;
-            this.last = newNode;
+            enqueueNode.next = this.last;
+            this.last = enqueueNode;
         }
-        this.length++;
+        this.size++;
         return this;
     }
+    dequeue () {
+        let dequeued = this.last;
+        if (!dequeued) return dequeued;
+        if (this.first === dequeued) {
+            this.first = null;
+            this.last = null;
+        }
+        this.last = dequeued.next;
+        this.size--;
+        return dequeued;
+    }
     peek () {
-        return this.last;
+        return this.first;
     }
     isEmpty () {
-        return !this.length;
+        return !this.first;
     }
 }
 
-let stack = new Stack();
-
-stack.push(1);
-stack.push(2);
-stack.push(3);
-stack.print();
+let q = new Queue();
+q.add(1);
+q.add(2);
+q.add(3);
+q.print();
